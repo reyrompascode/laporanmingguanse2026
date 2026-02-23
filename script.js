@@ -331,7 +331,6 @@ async function exportToPDF() {
     const cellNomor = row.cells[0]; // Kolom index 0 (Nomor)
     if (cellNomor) {
       cellNomor.style.textAlign = "center"; // Horizontal Tengah
-      cellNomor.style.verticalAlign = "middle"; // Vertikal Tengah
       cellNomor.style.width = "10mm"; // Opsional: batasi lebar kolom nomor
     }
   });
