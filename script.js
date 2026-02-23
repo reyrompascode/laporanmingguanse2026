@@ -135,7 +135,7 @@ async function exportToPDF() {
     return;
   }
   newTab.document.write(
-    "<html><head><title>Sabar 1,5 jam doang kok...</title></head><body style='font-family:sans-serif; text-align:center; padding-top:50px;'><p>Sedang menyusun laporan resmi... Mohon tunggu.</p></body></html>",
+    "<html><head><title>Sabar 1,5 jam doang kok...</title></head><body style='font-family:sans-serif; text-align:center; padding-top:50px;'><p>Mohon tunggu.. gak lama.. 1,5 jam doang</p></body></html>",
   );
 
   const printArea = document.createElement("div");
