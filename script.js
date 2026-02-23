@@ -40,6 +40,47 @@ bidangList.forEach((namaBidang, index) => {
   tableBody.appendChild(row);
 });
 
+function formatRentangTanggal(tglMulai, tglSelesai) {
+  if (!tglMulai || !tglSelesai) return "-";
+
+  const bulanIndo = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  const d1 = new Date(tglMulai);
+  const d2 = new Date(tglSelesai);
+
+  const tgl1 = d1.getDate().toString().padStart(2, "0");
+  const tgl2 = d2.getDate().toString().padStart(2, "0");
+  const bln1 = bulanIndo[d1.getMonth()];
+  const bln2 = bulanIndo[d2.getMonth()];
+  const thn1 = d1.getFullYear();
+  const thn2 = d2.getFullYear();
+
+  // Jika bulan dan tahun sama: "01 - 15 Februari 2026"
+  if (bln1 === bln2 && thn1 === thn2) {
+    return `${tgl1} - ${tgl2} ${bln1} ${thn1}`;
+  }
+  // Jika bulan berbeda tapi tahun sama: "30 Januari - 02 Februari 2026"
+  else if (thn1 === thn2) {
+    return `${tgl1} ${bln1} - ${tgl2} ${bln2} ${thn1}`;
+  }
+  // Jika tahun berbeda: "30 Desember 2025 - 02 Januari 2026"
+  else {
+    return `${tgl1} ${bln1} ${thn1} - ${tgl2} ${bln2} ${thn2}`;
+  }
+}
 // Fungsi Tambah Kegiatan & Status Secara Sinkron
 function addActivityGroup(id) {
   // Tambah Textarea
@@ -124,8 +165,12 @@ async function exportToPDF() {
   const { jsPDF } = window.jspdf;
   // 1. Inisialisasi DOC di awal
   const doc = new jsPDF("p", "mm", "a4");
+  // Ambil nilai dari dua input
+  const tglStart = document.getElementById("tanggal_mulai").value;
+  const tglEnd = document.getElementById("tanggal_selesai").value;
 
-  const tanggal = document.getElementById("tanggal").value || "-";
+  // Gunakan fungsi helper untuk mendapatkan format "01 - 15 Februari 2026"
+  const rentangTanggal = formatRentangTanggal(tglStart, tglEnd);
   const provinsi = document.getElementById("provinsi").value || "-";
   const kota = document.getElementById("kota").value || "-";
 
@@ -155,7 +200,7 @@ async function exportToPDF() {
             <tr>
                 <td style="padding: 2px 0; border: none; width: 100px;">TANGGAL</td>
                 <td style="padding: 2px 5px; border: none;">:</td>
-                <td style="padding: 2px 0; border: none;">${tanggal.toUpperCase()}</td>
+                <td style="padding: 2px 0; border: none;">${rentangTanggal.toUpperCase()}</td>
             </tr>
             <tr>
                 <td style="padding: 2px 0; border: none;">PROVINSI</td>
