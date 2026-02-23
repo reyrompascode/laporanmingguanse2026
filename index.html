@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoring Kegiatan - 4 Bidang</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Form Entry Lokasi</h2>
+      <div class="form-header">
+        <div class="input-box">
+          <label>Tanggal</label>
+          <input type="date" id="tanggal" />
+        </div>
+        <div class="input-box">
+          <label>Provinsi</label>
+          <input type="text" id="provinsi" placeholder="Provinsi" />
+        </div>
+        <div class="input-box">
+          <label>Kota</label>
+          <input type="text" id="kota" placeholder="Kota" />
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table id="monitoringTable">
+          <thead>
+            <tr>
+              <th style="width: 40px">No.</th>
+              <th style="width: 180px">Bidang</th>
+              <th>Kegiatan yang telah dilakukan</th>
+              <th style="width: 100px">Status</th>
+              <th>Rencana kedepan dan pengawalan</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <hr />
+      <div class="attachment-section">
+        <h3>Lampiran</h3>
+        <div id="attachment-container">
+          <div class="attachment-item" id="attach-1">
+            <input
+              type="text"
+              class="input-poin"
+              placeholder="Nama Poin/Keterangan Lampiran (Contoh: Dokumentasi Rapat)"
+            />
+            <div class="image-upload-wrapper">
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onchange="previewImages(event, 'preview-1')"
+              />
+              <div class="image-preview" id="preview-1"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-add-poin" onclick="addAttachmentPoint()">
+          + Tambah Poin Lampiran
+        </button>
+      </div>
+
+      <div class="footer-action">
+        <button class="btn-save" onclick="exportToPDF()">Ekspor ke PDF</button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
